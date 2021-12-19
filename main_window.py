@@ -1,5 +1,6 @@
 from PySide6 import QtCore, QtWidgets, QtGui, QtOpenGLWidgets
 from math import cos, sin, pi
+from effects.effect import Effect
 from pixels import Pixels
 from effects import rainbowLine, redGreen, snake, rainbowBursts
 import PySide6
@@ -17,6 +18,8 @@ class MainWindow(QtWidgets.QWidget):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect( self.next_frame )
 
+        self.frames_rendered = 0
+        self.effect_index = 0
         self.setup_effects()
 
         self.rootVBox = QtWidgets.QVBoxLayout(self)
@@ -25,13 +28,13 @@ class MainWindow(QtWidgets.QWidget):
         self.reset_scene()
 
     def setup_effects(self):
-        self.pixels: Pixels = Pixels(MainWindow.DEFAUL_COUNT, 2.8)
+        self.pixels: Pixels = Pixels(MainWindow.DEFAUL_COUNT, 1)
         self.effects = [            
-            snake.Snake(self.pixels, 30, 8, 255, 0, 0, 0),
             rainbowLine.RainbowLine(self.pixels, 255),
+            snake.Snake(self.pixels, 30, 8, 255, 0, 0, 0),
             rainbowBursts.RainbowBursts(self.pixels, 255, 20),
         ]
-        self.effect = self.effects[2]
+        self.effect = self.effects[self.effect_index]
 
     def setup_scene(self):
         self.scene = QtWidgets.QGraphicsScene()
@@ -159,5 +162,18 @@ class MainWindow(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def next_frame(self):
+        self.frames_rendered +=1
+
+        if self.frames_rendered > 100:
+            self.frames_rendered = 0
+            self.effect_index +=1
+
+            if self.effect_index >= len(self.effects):
+                self.effect_index = 0
+
+            print(f'effect index: {self.effect_index}')
+            self.effect = self.effects[self.effect_index]
+            self.effect.reset()
+
         self.effect.next_frame()
         self.render_scene()

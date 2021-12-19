@@ -25,10 +25,13 @@ class MainWindow(QtWidgets.QWidget):
         self.reset_scene()
 
     def setup_effects(self):
-        self.pixels: Pixels = Pixels(MainWindow.DEFAUL_COUNT, 1)
-        #self.effect = snake.Snake(self.pixels, 30, 8, 255, 0, 0, 0)
-        #self.effect = rainbowLine.RainbowLine(self.pixels, 255)
-        self.effect = rainbowBursts.RainbowBursts(self.pixels, 255, 20)
+        self.pixels: Pixels = Pixels(MainWindow.DEFAUL_COUNT, 2.8)
+        self.effects = [            
+            snake.Snake(self.pixels, 30, 8, 255, 0, 0, 0),
+            rainbowLine.RainbowLine(self.pixels, 255),
+            rainbowBursts.RainbowBursts(self.pixels, 255, 20),
+        ]
+        self.effect = self.effects[2]
 
     def setup_scene(self):
         self.scene = QtWidgets.QGraphicsScene()
@@ -37,7 +40,6 @@ class MainWindow(QtWidgets.QWidget):
         self.rootVBox.addWidget(self.view)
         self.last_time = time.time()
         self.frame_count = 0
-
 
     def setup_toolbar(self):
         self.buttons_bar = QtWidgets.QHBoxLayout()

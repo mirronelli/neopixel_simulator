@@ -8,7 +8,7 @@ class Pixels:
     def show(self):
         print(self.data)
 
-    def setPixelColorRGB(self, n, red, green, blue, white=0):
+    def setPixelColorRGB(self, n, red:int, green:int, blue:int, white:int = 0):
         self.data[n]['red'] = self.gamma_table[int(red)]
         self.data[n]['green'] = self.gamma_table[int(green)]
         self.data[n]['blue'] = self.gamma_table[int(blue)]

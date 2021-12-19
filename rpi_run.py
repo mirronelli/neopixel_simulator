@@ -1,6 +1,6 @@
 import time
 from rpi_ws281x import Color, PixelStrip, ws
-from effects import snake
+from effects import snake, rainbowBursts, rainbowLine, redGreen
 
 LED_COUNT = 95         # Number of LED pixels.
 LED_PIN = 12           # GPIO pin connected to the pixels (must support PWM!).
@@ -12,10 +12,10 @@ LED_CHANNEL = 0
 LED_STRIP = ws.SK6812_STRIP_RGBW
 SLEEP = 100
 
-strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
-strip.begin()
+pixels = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
+pixels.begin()
 
-effect = snake.Snake(strip, 30, 8, 255, 0, 0, 0)
+effect = rainbowBursts.RainbowBursts(pixels, 255, 20)
 while True:
     effect.next_frame()
-    strip.show()
+    pixels.show()

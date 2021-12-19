@@ -1,5 +1,5 @@
 import time
-from rpi_ws281x import Color, PixelStrip, ws
+from rpi_ws281x import PixelStrip, ws
 from effects import snake, rainbowBursts, rainbowLine, redGreen
 
 LED_COUNT = 95         # Number of LED pixels.
@@ -18,13 +18,23 @@ pixels.begin()
 effects = [
     rainbowLine.RainbowLine(pixels, 255),
     snake.Snake(pixels, 20, 5, 255, 0, 0, 0),
-    rainbowBursts.RainbowBursts(pixels, 255, 20),
+    rainbowBursts.RainbowBursts(pixels, 255, 20)
 ]
 
-while True:
-    for effect in effects:
-        effect.reset()
-        for i in range(1000):
-            effect.next_frame()
-            pixels.show()
-            time.sleep(10)
+#while True:
+#    for effect in effects:
+#        effect.reset()
+#        for i in range(1000):
+#            effect.next_frame()
+#            pixels.show()
+#            time.sleep(10)
+
+#effect = effects[0]
+effect = snake.Snake(pixels, 20, 5, 255, 0, 0, 0)
+effect.reset()
+effect.next_frame()
+
+for i in range(1000):
+    effect.next_frame()
+    pixels.show()
+

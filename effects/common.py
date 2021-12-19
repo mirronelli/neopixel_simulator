@@ -16,4 +16,6 @@ def color_function(i, steps, max):
     return 0
 
 def create_gamma_table(gamma):
-    return [round(pow(i / 255, gamma) * 255) for i in range(256)]
+    table = [round(pow(i / 254, gamma) * 254) + 1 for i in range(255)]
+    table.insert(0, 0)
+    return table

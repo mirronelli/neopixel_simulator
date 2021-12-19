@@ -1,9 +1,10 @@
 from math import pow
+from effects.common import create_gamma_table
 class Pixels:
     def __init__(self, count, gamma = 2.8) -> None:
         self.count = count
         self.data = [{'red':0, 'green':0, 'blue': 0, 'white': 0} for _ in range(self.count)]
-        self.create_gamma_table(gamma)
+        self.gamma_table = create_gamma_table(gamma)
 
     def show(self):
         print(self.data)
@@ -22,9 +23,6 @@ class Pixels:
 
     def __getitem__(self, index):
         return self.data[index]
-
-    def create_gamma_table(self, gamma):
-        self.gamma_table = [round(pow(i / 255, gamma) * 255) for i in range(256)]
 
     def numPixels(self):
         return len(self.data)

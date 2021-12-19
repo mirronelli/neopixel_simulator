@@ -16,8 +16,9 @@ pixels = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BR
 pixels.begin()
 
 effects = [
+    rainbowLine.RainbowLine(pixels, 255),
+    snake.Snake(pixels, 20, 5, 255, 0, 0, 0),
     rainbowBursts.RainbowBursts(pixels, 255, 20),
-    snake.Snake(pixels, 20, 5, 255, 0, 0, 0)
 ]
 
 while True:

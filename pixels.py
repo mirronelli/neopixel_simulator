@@ -18,10 +18,10 @@ class Pixels:
     # this is how the ws strip returns the pixel
     def getPixelColorRGBW(self, n):
         c = lambda: None
-        setattr(c, 'white', self.data[n]['white'])
-        setattr(c, 'red', self.data[n]['red'])
-        setattr(c, 'green', self.data[n]['green'])
-        setattr(c, 'blue', self.data[n]['blue'])
+        setattr(c, 'w', self.data[n]['white'])
+        setattr(c, 'r', self.data[n]['red'])
+        setattr(c, 'g', self.data[n]['green'])
+        setattr(c, 'b', self.data[n]['blue'])
         return c
 
     def getPixels(self):

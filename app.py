@@ -4,5 +4,5 @@ from main_window import MainWindow
 app = QApplication([])
 
 window = MainWindow()
-window.showMaximized()
+window.show()
 app.exec()

@@ -17,9 +17,9 @@ pixels.setGamma(common.create_gamma_table(2.2))
 pixels.begin()
 
 effects = [
-    rainbowLine.RainbowLine(pixels, 255),
     snake.Snake(pixels, 20, 5, 255, 0, 0, 0),
-    rainbowBursts.RainbowBursts(pixels, 255, 20)
+    rainbowLine.RainbowLine(pixels, 255),
+    rainbowBursts.RainbowBursts(pixels, 255, 20),
 ]
 
 def pause(milis):
@@ -33,8 +33,7 @@ def pause(milis):
 #            pixels.show()
 #            time.sleep(10)
 
-#effect = effects[0]
-effect = snake.Snake(pixels, 20, 5, 255, 0, 0, 0)
+effect = effects[0]
 effect.reset()
 
 for i in range(1000):

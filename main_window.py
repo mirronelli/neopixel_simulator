@@ -110,10 +110,10 @@ class MainWindow(QtWidgets.QWidget):
 
         self.timer.setInterval(self.frameDelayBox.value())
         pixelCount = self.pixelCountBox.value()
-        self.pixels: Pixels = Pixels(pixelCount)
+        self.pixels: Pixels = Pixels(pixelCount, 1)
         # self.effect = snake.Snake(self.pixels, 30, 8, 255, 0, 0, 0)
-        # self.effect = rainbowLine.Rainbow(self.pixels, 255)
-        self.effect = rainbowBursts.RainbowBursts(self.pixels, 255, 20)
+        self.effect = rainbowLine.RainbowLine(self.pixels, 255)
+        # self.effect = rainbowBursts.RainbowBursts(self.pixels, 255, 20)
         amplitude = 500
         waweLength = 500
 

@@ -24,7 +24,8 @@ class Pixels:
         return self.data[index]
 
     def create_gamma_table(self, gamma):
-        self.gamma_table = [round(pow(i / 255, gamma) * 255 + 0.49999) for i in range(256)]
+        self.gamma_table = [round(pow(i / 255, gamma) * 255) for i in range(256)]
+        print(self.gamma_table)
 
     def numPixels(self):
         return len(self.data)

@@ -22,9 +22,9 @@ class RainbowLine(effect.Effect):
         # __/¯¯\    # phase shift + 2/3
         third = self.count / 3
         for i in range(self.count):
-            self.pixels.setPixelColorRGB(i, 
-                color_function(i + third,    self.count) * self.brightness,
-                color_function(i,            self.count) * self.brightness,
-                color_function(i + 2* third, self.count) * self.brightness,
-                0
+            self.pixels.setPixelColorRGB(
+                i, 
+                color_function(i + third,    self.count, self.brightness),
+                color_function(i,            self.count, self.brightness),
+                color_function(i + 2* third, self.count, self.brightness)
             )

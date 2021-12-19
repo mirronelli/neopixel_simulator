@@ -8,5 +8,9 @@ class Effect():
     def next_frame(self):
         pass
 
+    def clear(self):
+        for i in range(self.count):
+            self.pixels.setPixelColorRGB(i, 0, 0, 0, 0)
+
     def reset(self):
         pass

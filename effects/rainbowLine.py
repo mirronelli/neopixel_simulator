@@ -6,6 +6,7 @@ class RainbowLine(effect.Effect):
     def __init__(self, pixels: Pixels, brightness) -> None:
         super().__init__(pixels)
         self.brightness =  brightness
+        self.third = self.count / 3
         self.reset()
 
     def next_frame(self):
@@ -20,11 +21,10 @@ class RainbowLine(effect.Effect):
         # ¯\__/¯    # phase shift + 1/3
         # /¯¯\__    # no shift
         # __/¯¯\    # phase shift + 2/3
-        third = self.count / 3
         for i in range(self.count):
             self.pixels.setPixelColorRGB(
                 i, 
-                color_function(i + third,    self.count, self.brightness),
-                color_function(i,            self.count, self.brightness),
-                color_function(i + 2* third, self.count, self.brightness)
+                color_function(i + self.third,    self.count, self.brightness),
+                color_function(i,                 self.count, self.brightness),
+                color_function(i + 2* self.third, self.count, self.brightness)
             )

@@ -13,6 +13,7 @@ class Snake(effect.Effect):
         self.reset()
 
     def reset(self):
+        super().clear()
         self.first_pixel = 0
         self.step = 1
 

@@ -117,7 +117,7 @@ class MainWindow(QtWidgets.QWidget):
         amplitude = 500
         waweLength = 500
 
-        for i in range(len(self.pixels)):
+        for i in range(self.pixels.count):
             self.scene.addEllipse(
                 waweLength * cos(i * ((pi*2)/pixelCount)),
                 amplitude * sin(i * ((pi*2)/pixelCount)),

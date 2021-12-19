@@ -10,13 +10,19 @@ class Pixels:
         print(self.data)
 
     def setPixelColorRGB(self, n, red:int, green:int, blue:int, white:int = 0):
-        self.data[n]['red'] = self.gamma_table[int(red)]
-        self.data[n]['green'] = self.gamma_table[int(green)]
-        self.data[n]['blue'] = self.gamma_table[int(blue)]
-        self.data[n]['white'] = self.gamma_table[int(white)]
+        self.data[n]['red'] = int(red)
+        self.data[n]['green'] = int(green)
+        self.data[n]['blue'] = int(blue)
+        self.data[n]['white'] = int(white)
 
+    # this is how the ws strip returns the pixel
     def getPixelColorRGBW(self, n):
-        return self.data[n]
+        c = lambda: None
+        setattr(c, 'white', self.data[n]['white'])
+        setattr(c, 'red', self.data[n]['red'])
+        setattr(c, 'green', self.data[n]['green'])
+        setattr(c, 'blue', self.data[n]['blue'])
+        return c
 
     def getPixels(self):
         return self.data

@@ -38,17 +38,17 @@ class Snake(effect.Effect):
             luminance = min(i * luminance_step, 255)
             self.pixels.setPixelColorRGB(
                 first_pixel + i, 
-                (luminance * self.red) / 255, 
-                (luminance * self.green) / 255, 
-                (luminance * self.blue) / 255, 
-                (luminance * self.white) / 255
+                int((luminance * self.red) / 255), 
+                int((luminance * self.green) / 255), 
+                int((luminance * self.blue) / 255), 
+                int((luminance * self.white) / 255)
             )
             self.pixels.setPixelColorRGB(
                 last_pixel - i, 
-                (luminance * self.red) / 255, 
-                (luminance * self.green) / 255, 
-                (luminance * self.blue) / 255, 
-                (luminance * self.white) / 255
+                int((luminance * self.red) / 255),
+                int((luminance * self.green) / 255),
+                int((luminance * self.blue) / 255),
+                int((luminance * self.white) / 255)
             )
 
     def min(a,b):

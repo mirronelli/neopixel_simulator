@@ -15,7 +15,15 @@ SLEEP = 100
 pixels = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
 pixels.begin()
 
-effect = rainbowBursts.RainbowBursts(pixels, 255, 20)
+effects = [
+    rainbowBursts.RainbowBursts(pixels, 255, 20),
+    snake.Snake(pixels, 20, 5, 255, 0, 0, 0)
+]
+
 while True:
-    effect.next_frame()
-    pixels.show()
+    for effect in effects:
+        effect.reset()
+        for i in range(1000):
+            effect.next_frame()
+            pixels.show()
+            time.sleep(10)

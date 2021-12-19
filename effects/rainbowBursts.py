@@ -6,11 +6,13 @@ class RainbowBursts(effect.Effect):
     def __init__(self, pixels: Pixels, brightness, steps) -> None:
         super().__init__(pixels)
         self.brightness =  brightness
-        self.step = 0
         self.steps = steps
         self.third = 2*steps
         self.all_steps = 6*steps
-        self.next_frame()
+        self.reset()
+        
+    def reset(self):
+        self.step = 0
 
     def next_frame(self):
         red   = color_function(self.step + self.third,    self.all_steps, self.brightness)

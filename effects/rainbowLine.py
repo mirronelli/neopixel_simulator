@@ -6,7 +6,7 @@ class RainbowLine(effect.Effect):
     def __init__(self, pixels: Pixels, brightness) -> None:
         super().__init__(pixels)
         self.brightness =  brightness
-        self.setup()
+        self.reset()
 
     def next_frame(self):
         last_pixel_color = self.pixels.getPixelColorRGBW(-1)
@@ -16,7 +16,7 @@ class RainbowLine(effect.Effect):
 
         self.pixels.setPixelColorRGB(0, last_pixel_color['red'], last_pixel_color['green'], last_pixel_color['blue'], last_pixel_color['white'])
 
-    def setup(self):
+    def reset(self):
         # ¯\__/¯    # phase shift + 1/3
         # /¯¯\__    # no shift
         # __/¯¯\    # phase shift + 2/3

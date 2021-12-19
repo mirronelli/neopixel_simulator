@@ -10,10 +10,11 @@ class Snake(effect.Effect):
         self.green = green
         self.blue = blue
         self.white = white
+        self.reset()
 
+    def reset(self):
         self.first_pixel = 0
         self.step = 1
-        self.next_frame()
 
     def next_frame(self):
         self.half_snake(self.first_pixel)

@@ -4,8 +4,10 @@ import pixels
 class RedGreen(effect.Effect):
     def __init__(self, pixels: pixels.Pixels) -> None:
         super().__init__(pixels)
+        self.reset()
+
+    def reset(self):
         self.step = 0
-        self.next_frame()
 
     def next_frame(self):
         for i in range(self.count):

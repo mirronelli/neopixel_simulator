@@ -7,3 +7,6 @@ class Effect():
 
     def next_frame(self):
         pass
+
+    def reset(self):
+        pass

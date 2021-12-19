@@ -114,6 +114,10 @@ class MainWindow(QtWidgets.QWidget):
         # self.effect = snake.Snake(self.pixels, 30, 8, 255, 0, 0, 0)
         self.effect = rainbowLine.RainbowLine(self.pixels, 255)
         # self.effect = rainbowBursts.RainbowBursts(self.pixels, 255, 20)
+
+        # render first frame
+        self.effect.next_frame()
+
         amplitude = 500
         waweLength = 500
 

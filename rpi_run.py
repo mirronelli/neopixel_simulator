@@ -28,12 +28,4 @@ while True:
        for i in range(1000):
            effect.next_frame()
            pixels.show()
-           time.sleep(10)
-
-# effect = effects[4]
-# effect.reset()
-
-# for i in range(1000):
-#     effect.next_frame()
-#     pixels.show()
-#     pause(10)
+           pause(10)

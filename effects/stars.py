@@ -1,6 +1,3 @@
-#int probability, int fadeSpeed, uint8_t red, uint8_t green, uint8_t blue, uint8_t white
-
-
 import effects.effect as effect
 from pixels import Pixels
 from random import randint

@@ -22,18 +22,18 @@ effects = create_all_list(pixels)
 def pause(milis):
     time.sleep(milis/1000)
 
-#while True:
-#    for effect in effects:
-#        effect.reset()
-#        for i in range(1000):
-#            effect.next_frame()
-#            pixels.show()
-#            time.sleep(10)
+while True:
+   for effect in reversed(effects):
+       effect.reset()
+       for i in range(1000):
+           effect.next_frame()
+           pixels.show()
+           time.sleep(10)
 
-effect = effects[3]
-effect.reset()
+# effect = effects[4]
+# effect.reset()
 
-for i in range(1000):
-    effect.next_frame()
-    pixels.show()
-    pause(10)
+# for i in range(1000):
+#     effect.next_frame()
+#     pixels.show()
+#     pause(10)

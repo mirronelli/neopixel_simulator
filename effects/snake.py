@@ -1,4 +1,5 @@
 import effects.effect as effect
+from common import min
 from pixels import Pixels
 
 class Snake(effect.Effect):
@@ -50,6 +51,3 @@ class Snake(effect.Effect):
                 int((luminance * self.blue) / 255),
                 int((luminance * self.white) / 255)
             )
-
-    def min(a,b):
-        return a if a < b else b

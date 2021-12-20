@@ -30,11 +30,10 @@ def pause(milis):
 #            pixels.show()
 #            time.sleep(10)
 
-effect = effects[0]
+effect = effects[3]
 effect.reset()
 
 for i in range(1000):
     effect.next_frame()
     pixels.show()
     pause(10)
-

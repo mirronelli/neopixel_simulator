@@ -10,7 +10,7 @@ class RainbowLine(effect.Effect):
         self.reset()
 
     def next_frame(self):
-        last_pixel_color = self.pixels.getPixelColorRGBW(-1)
+        last_pixel_color = self.pixels.getPixelColorRGBW(self.count - 1)
         for i in reversed(range(self.count)):
             moved_pixel = self.pixels.getPixelColorRGBW(i-1)
             self.pixels.setPixelColorRGB(i, moved_pixel.r, moved_pixel.g, moved_pixel.b, moved_pixel.w)

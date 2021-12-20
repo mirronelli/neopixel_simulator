@@ -10,12 +10,7 @@ class RainbowLine(effect.Effect):
         self.reset()
 
     def next_frame(self):
-        last_pixel_color = self.pixels.getPixelColorRGBW(self.count - 1)
-        for i in reversed(range(self.count)):
-            moved_pixel = self.pixels.getPixelColorRGBW(i-1)
-            self.pixels.setPixelColorRGB(i, moved_pixel.r, moved_pixel.g, moved_pixel.b, moved_pixel.w)
-
-        self.pixels.setPixelColorRGB(0, last_pixel_color.r, last_pixel_color.g, last_pixel_color.b, last_pixel_color.w)
+        super().cycle()
 
     def reset(self):
         # ¯\__/¯    # phase shift + 1/3

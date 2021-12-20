@@ -1,7 +1,7 @@
 import time
 from rpi_ws281x import PixelStrip, ws
 from effects import snake, rainbowBursts, rainbowLine, redGreen, common
-from effect_factory import create_all_list
+from effects.effect_factory import create_all_list
 
 LED_COUNT = 95         # Number of LED pixels.
 LED_PIN = 12           # GPIO pin connected to the pixels (must support PWM!).

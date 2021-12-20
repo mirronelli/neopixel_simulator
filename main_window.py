@@ -1,9 +1,8 @@
 from PySide6 import QtCore, QtWidgets, QtGui, QtOpenGLWidgets
 from math import cos, sin, pi
-from effects.effect import Effect
 from pixels import Pixels
-from effects import rainbowLine, redGreen, snake, rainbowBursts, stars
-from effect_factory import create_all_list
+from effects.effect import Effect
+from effects.effect_factory import create_all_list 
 import PySide6
 import time
 
@@ -11,7 +10,7 @@ class MainWindow(QtWidgets.QWidget):
     PIXEL_SIZE = 18
     DEFAUL_COUNT = 100
     DEFAUL_FRAME_DELAY = 30
-    DEFAULT_EFFECT_INDEX = 3
+    DEFAULT_EFFECT_INDEX = 5
     DO_CYCLE_EFFECT = False
     DO_CYCLE_AFTER_FRAMES = 190
 
@@ -33,8 +32,8 @@ class MainWindow(QtWidgets.QWidget):
 
     def setup_effects(self):
         self.pixels: Pixels = Pixels(MainWindow.DEFAUL_COUNT, 1)
-        self.effects = create_all_list(self.pixels)
-        self.effect = self.effects[self.effect_index]
+        self.effects: list[Effect] = create_all_list(self.pixels)
+        self.effect: Effect = self.effects[self.effect_index]
 
     def setup_scene(self):
         self.scene = QtWidgets.QGraphicsScene()

@@ -1,6 +1,7 @@
 import time
 from rpi_ws281x import PixelStrip, ws
 from effects import snake, rainbowBursts, rainbowLine, redGreen, common
+from effect_factory import create_all_list
 
 LED_COUNT = 95         # Number of LED pixels.
 LED_PIN = 12           # GPIO pin connected to the pixels (must support PWM!).
@@ -16,11 +17,7 @@ pixels = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BR
 pixels.setGamma(common.create_gamma_table(2.2))
 pixels.begin()
 
-effects = [
-    snake.Snake(pixels, 20, 5, 255, 0, 0, 0),
-    rainbowLine.RainbowLine(pixels, 255),
-    rainbowBursts.RainbowBursts(pixels, 255, 20),
-]
+effects = create_all_list(pixels)
 
 def pause(milis):
     time.sleep(milis/1000)

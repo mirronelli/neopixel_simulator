@@ -3,6 +3,7 @@ from math import cos, sin, pi
 from effects.effect import Effect
 from pixels import Pixels
 from effects import rainbowLine, redGreen, snake, rainbowBursts, stars
+from effect_factory import create_all_list
 import PySide6
 import time
 
@@ -10,6 +11,7 @@ class MainWindow(QtWidgets.QWidget):
     PIXEL_SIZE = 18
     DEFAUL_COUNT = 100
     DEFAUL_FRAME_DELAY = 30
+    DEFAULT_EFFECT_INDEX = 3
     DO_CYCLE_EFFECT = False
     DO_CYCLE_AFTER_FRAMES = 190
 
@@ -21,7 +23,7 @@ class MainWindow(QtWidgets.QWidget):
         self.timer.timeout.connect( self.next_frame )
 
         self.frames_rendered = 0
-        self.effect_index = 0
+        self.effect_index = MainWindow.DEFAULT_EFFECT_INDEX
         self.setup_effects()
 
         self.rootVBox = QtWidgets.QVBoxLayout(self)
@@ -31,12 +33,7 @@ class MainWindow(QtWidgets.QWidget):
 
     def setup_effects(self):
         self.pixels: Pixels = Pixels(MainWindow.DEFAUL_COUNT, 1)
-        self.effects = [            
-            rainbowLine.RainbowLine(self.pixels, 255),
-            snake.Snake(self.pixels, 30, 8, 255, 0, 0, 0),
-            rainbowBursts.RainbowBursts(self.pixels, 255, 20),
-            stars.Stars(self.pixels, 255, 0, 0 ,0)
-        ]
+        self.effects = create_all_list(self.pixels)
         self.effect = self.effects[self.effect_index]
 
     def setup_scene(self):

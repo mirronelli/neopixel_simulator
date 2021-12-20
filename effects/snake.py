@@ -1,5 +1,5 @@
 import effects.effect as effect
-from common import min
+from effects.common import min
 from pixels import Pixels
 
 class Snake(effect.Effect):

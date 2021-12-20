@@ -2,7 +2,7 @@ from PySide6 import QtCore, QtWidgets, QtGui, QtOpenGLWidgets
 from math import cos, sin, pi
 from effects.effect import Effect
 from pixels import Pixels
-from effects import rainbowLine, redGreen, snake, rainbowBursts
+from effects import rainbowLine, redGreen, snake, rainbowBursts, stars
 import PySide6
 import time
 
@@ -10,6 +10,8 @@ class MainWindow(QtWidgets.QWidget):
     PIXEL_SIZE = 18
     DEFAUL_COUNT = 100
     DEFAUL_FRAME_DELAY = 30
+    DO_CYCLE_EFFECT = False
+    DO_CYCLE_AFTER_FRAMES = 190
 
     def __init__(self) -> None:
         super().__init__()
@@ -33,6 +35,7 @@ class MainWindow(QtWidgets.QWidget):
             rainbowLine.RainbowLine(self.pixels, 255),
             snake.Snake(self.pixels, 30, 8, 255, 0, 0, 0),
             rainbowBursts.RainbowBursts(self.pixels, 255, 20),
+            stars.Stars(self.pixels, 255, 0, 0 ,0)
         ]
         self.effect = self.effects[self.effect_index]
 
@@ -162,18 +165,18 @@ class MainWindow(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def next_frame(self):
-        self.frames_rendered +=1
+        if MainWindow.DO_CYCLE_EFFECT:
+            if self.frames_rendered > MainWindow.DO_CYCLE_AFTER_FRAMES:
+                self.frames_rendered = 0
+                self.effect_index +=1
 
-        if self.frames_rendered > 100:
-            self.frames_rendered = 0
-            self.effect_index +=1
+                if self.effect_index >= len(self.effects):
+                    self.effect_index = 0
 
-            if self.effect_index >= len(self.effects):
-                self.effect_index = 0
+                self.effect = self.effects[self.effect_index]
+                self.effect.reset()
 
-            print(f'effect index: {self.effect_index}')
-            self.effect = self.effects[self.effect_index]
-            self.effect.reset()
+            self.frames_rendered +=1
 
         self.effect.next_frame()
         self.render_scene()

@@ -19,3 +19,9 @@ def create_gamma_table(gamma):
     table = [round(pow(i / 254, gamma) * 254) + 1 for i in range(255)]
     table.insert(0, 0)
     return table
+
+def max(a, b):
+    return a if a > b else b
+
+def min(a, b):
+    return a if a < b else b

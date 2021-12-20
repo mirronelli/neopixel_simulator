@@ -10,6 +10,12 @@ class Pixels:
         print(self.data)
 
     def setPixelColorRGB(self, n, red:int, green:int, blue:int, white:int = 0):
+        if n < 0:
+            raise NameError("Cannot use negative indexes, the C style array in rpi_ws281x does not support it and writes bogus data.")
+
+        if n >= self.count:
+            raise NameError("Index out of bounds.")
+
         self.data[n]['red'] = int(red)
         self.data[n]['green'] = int(green)
         self.data[n]['blue'] = int(blue)
@@ -17,6 +23,12 @@ class Pixels:
 
     # this is how the ws strip returns the pixel
     def getPixelColorRGBW(self, n):
+        if n < 0:
+            raise NameError("Cannot use negative indexes, the C style array in rpi_ws281x does not support it and returns bogus data.")
+
+        if n >= self.count:
+            raise NameError("Index out of bounds.")
+            
         c = lambda: None
         setattr(c, 'w', self.data[n]['white'])
         setattr(c, 'r', self.data[n]['red'])

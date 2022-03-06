@@ -1,6 +1,6 @@
 import time
 from rpi_ws281x import PixelStrip, ws
-from effects import snake, rainbowBursts, rainbowLine, redGreen, common
+from effects import snake, rainbowBursts, rainbowLine, redGreen, common, two_color
 from effects.effect_factory import create_all_list
 
 LED_COUNT = 304         # Number of LED pixels.
@@ -13,19 +13,24 @@ LED_CHANNEL = 0
 LED_STRIP = ws.SK6812_STRIP_GRBW
 SLEEP = 1
 
+def pause(milis):
+    time.sleep(milis/1000)
+
 pixels = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
 pixels.setGamma(common.create_gamma_table(2.2))
 pixels.begin()
 
-effects = create_all_list(pixels)
+# effects = create_all_list(pixels)
+# while True:
+#    for effect in reversed(effects):
+#        effect.reset()
+#        for i in range(1000):
+#            effect.next_frame()
+#            pixels.show()
+#            pause(SLEEP)
 
-def pause(milis):
-    time.sleep(milis/1000)
-
+effect = two_color.TwoColor(pixels, 255, 255, 0, 0, 0, 255)
+effect.reset()
 while True:
-   for effect in reversed(effects):
-       effect.reset()
-       for i in range(1000):
-           effect.next_frame()
-           pixels.show()
-           #pause(SLEEP)
+    effect.next_frame()
+    pixels.show()

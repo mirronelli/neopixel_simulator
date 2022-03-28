@@ -11,12 +11,24 @@ class TwoColor(effect.Effect):
         self.g2 = g2
         self.b2 = b2
 
+
     def next_frame(self):
-        super().cycle()
+        # super().cycle()
+        self.switch_forward +=1
+        if (self.switch_forward >= self.count):
+            self.switch_forward = 0
+        
+        self.switch_back +=1
+        if (self.switch_back >= self.count):
+            self.switch_back = 0
+        
+        self.pixels.setPixelColorRGB(self.switch_forward, self.r1, self.g1, self.b1)
+        self.pixels.setPixelColorRGB(self.switch_back, self.r2, self.g2, self.b2)
 
     def reset(self):
-        first_half = self.count // 2
-        for i in range(first_half):
+        self.switch_forward = self.count // 2 - 1
+        self.switch_back = self.count
+        for i in range(self.count // 2):
             self.pixels.setPixelColorRGB(i, self.r1, self.g1, self.b1)
-        for i in range(first_half, self.count):
+        for i in range(self.count // 2, self.count):
             self.pixels.setPixelColorRGB(i, self.r2, self.g2, self.b2)

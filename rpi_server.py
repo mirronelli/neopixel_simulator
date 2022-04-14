@@ -17,7 +17,7 @@ pixels = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BR
 pixels.setGamma(common.create_gamma_table(2.2))
 pixels.begin()
 
-pixels = None
+#pixels = None
 new_effect = None
 current_effect = None
 frame_delay = 0

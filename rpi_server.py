@@ -35,9 +35,9 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     message = msg.payload.decode()
     print(message)
-    match message.split(":", 1):
-        case ["effect", effect_definition]:
-            new_effect, led_count, frame_delay = create_effect(pixels, effect_definition)
+    command, effect_definition = message.split(":", 1)
+    if command == "effect":
+        new_effect, led_count, frame_delay = create_effect(pixels, effect_definition)
 
 
 client = paho.Client("rpi")

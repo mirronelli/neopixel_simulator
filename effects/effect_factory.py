@@ -17,11 +17,10 @@ def create_effect(pixels, effect_definition) -> Tuple[effect.Effect, int, int]:
     effect, all_parameters = effect_definition.split(":", 1)
     led_count, frame_delay, *parameters = [int(x) for x in all_parameters.split(";")]
 
-    match effect:
-        case "stars":
+    if effect == "stars":
             new_star_probability, fade_steps, r, g, b, w = parameters
             new_effect = stars.Stars(pixels, r, g, b, w, new_star_probability, fade_steps)
-        case "snake":
+    elif effect == "snake":
             snake_length, dimmed_led_count, r, g, b, w = parameters
             new_effect = snake.Snake(pixels, snake_length, dimmed_led_count, r, g, b, w)
 

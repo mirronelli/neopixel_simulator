@@ -55,9 +55,10 @@ while (True):
         print("changing effect")
         current_effect = new_effect
         current_effect.reset()
+	pixels.show()
         new_effect = None
 
     if current_effect:
         current_effect.next_frame()
         pixels.show()
-    time.sleep(frame_delay)
+    time.sleep(frame_delay/1000)

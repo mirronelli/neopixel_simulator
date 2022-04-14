@@ -33,6 +33,10 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
+    global new_effect
+    global frame_delay
+    global led_count
+
     message = msg.payload.decode()
     print(message)
     command, effect_definition = message.split(":", 1)
@@ -47,34 +51,13 @@ client.connect("ubi", )
 
 client.loop_start()
 while (True):
-    if new_effect:
+    if new_effect is not None:
+        print("changing effect")
         current_effect = new_effect
+        current_effect.reset()
         new_effect = None
 
     if current_effect:
         current_effect.next_frame()
         pixels.show()
     time.sleep(frame_delay)
-
-client.loop_stop()
-
-
-
-
-
-# effects = create_all_list(pixels)
-# while True:
-#    for effect in reversed(effects):
-#        effect.reset()
-#        for i in range(1000):
-#            effect.next_frame()
-#            pixels.show()
-#            pause(SLEEP)
-
-# effect = two_color.TwoColor(pixels, 255, 255, 0, 0, 0, 255)
-# #effect = snake.Snake(pixels, 10, 10, 255, 255, 0, 0)
-# effect.reset()
-# while True:
-#     effect.next_frame()
-#     pixels.show()
-

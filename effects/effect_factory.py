@@ -45,6 +45,8 @@ def create_effect(pixels, effect_definition) -> Tuple[effect.Effect, int, int]:
         elif effect == "solid":
                 r, g, b, w = parameters
                 new_effect = solid.Solid(pixels, r, g, b, w)
+        elif effect == "clear":
+                new_effect = solid.Solid(pixels, 0, 0, 0, 0)
     except:
         print("invalid command, ignoring")
 

@@ -23,7 +23,6 @@ def create_effect(pixels, effect_definition) -> Tuple[effect.Effect, int, int]:
 
         if effect == "stars":
                 new_star_probability, fade_steps, r, g, b, w = parameters
-                print(f'nsp {new_star_probability}, fs {fade_steps}, r{r} g{g} b{b} {w}')
                 new_effect = stars.Stars(pixels, r, g, b, w, new_star_probability, fade_steps)
         elif effect == "snake":
                 snake_length, dimmed_led_count, r, g, b, w = parameters

@@ -29,8 +29,9 @@ pixels.begin()
 #            pixels.show()
 #            pause(SLEEP)
 
-effect = two_color.TwoColor(pixels, 255, 255, 0, 0, 0, 255)
+#effect = two_color.TwoColor(pixels, 255, 255, 0, 0, 0, 255)
 #effect = snake.Snake(pixels, 10, 10, 255, 255, 0, 0)
+effect = rainbowBursts.RainbowBursts(pixels, 255, 64)
 effect.reset()
 while True:
     effect.next_frame()

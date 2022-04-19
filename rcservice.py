@@ -86,7 +86,7 @@ class RCService():
                 self.waiting_for = "sunrise"
                 self.calculateSunTimes((current_time + dt.timedelta(days=1)).date())
 
-                if self.suspended_effect is not None and self.current_effect is None:
+                if self.suspended_effect is not None:
                     print("Resuming effect")
                     self.set_effect(self.suspended_effect)
 
@@ -103,7 +103,8 @@ class RCService():
     def set_effect(self, effect:Effect):
         self.suspended_effect = None
         self.current_effect = effect
-        effect.reset()
+        if effect is not None: 
+            effect.reset()
 
 
     def startServer(self) -> Client:

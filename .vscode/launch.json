@@ -9,10 +9,10 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "rpi_server",
+            "name": "pc_server",
             "type": "python",
             "request": "launch",
-            "program": "rpi_server.py",
+            "program": "pc_server.py",
             "console": "integratedTerminal"
         },
         {

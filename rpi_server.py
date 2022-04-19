@@ -1,6 +1,6 @@
 from datetime import date, datetime, timedelta
 import time
-#from rpi_ws281x import PixelStrip, ws
+from rpi_ws281x import PixelStrip, ws
 from effects import snake, rainbowBursts, rainbowLine, redGreen, common, two_color
 from effects.effect import Effect
 from effects.effect_factory import create_all_list, create_effect
@@ -16,23 +16,24 @@ class NeoPixelServer():
         self.LED_BRIGHTNESS = 255   # Set to 0 for darkest and 255 for brightest
         self.LED_INVERT = False     # True to invert the signal (when using NPN transistor level shift)
         self.LED_CHANNEL = 0
-#        self.LED_STRIP = ws.SK6812_STRIP_GRBW
+        self.LED_STRIP = ws.SK6812_STRIP_GRBW
 
-# pixels = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
-# pixels.setGamma(common.create_gamma_table(2.8))
-# pixels.begin()
+        self.pixels = PixelStrip(self.LED_COUNT, self.LED_PIN, self.LED_FREQ_HZ, self.LED_DMA, self.LED_INVERT, self.LED_BRIGHTNESS, self.LED_CHANNEL, self.LED_STRIP)
+        self.pixels.setGamma(common.create_gamma_table(2.8))
+        self.pixels.begin()
 
         self.current_effect:Effect = None          # the current effect
         self.frame_delay = 1
         self.led_count = 0
 
         self.last_time_check = 0            # track the last time sunset and sunrise have been checked
-        self.current_date = date.min        
+        self.current_date = date.min
         self.suspended_effect:Effect = None        # remembers the effect that gets suspended on sunrise until sunset
         self.calculateSunTimes()
         self.detectTimeState()
 
         self.minutes_jump = 0
+        self.minutes_jump_increment = 0
 
     def calculateSunTimes(self, for_day=None):
         current_time = datetime.utcnow()
@@ -64,16 +65,16 @@ class NeoPixelServer():
         print(message)
         command, effect_definition = message.split(":", 1)
         if command == "effect":
-            #self.current_effect, self.led_count, self.frame_delay = create_effect(pixels, effect_definition)
-            #self.current_effect.reset()
+            self.current_effect, self.led_count, self.frame_delay = create_effect(self.pixels, effect_definition)
+            self.current_effect.reset()
             self.frame_delay = self.frame_delay/1000
 
 
     def clear(self):
         """Clears the leds to black."""
-        # for x in range(0, pixels.numPixels()):
-        #     pixels.setPixelColorRGB(x, 0, 0, 0, 0)
-        # pixels.show()
+        for x in range(0, self.pixels.numPixels()):
+            self.pixels.setPixelColorRGB(x, 0, 0, 0, 0)
+        self.pixels.show()
         pass
 
 
@@ -83,7 +84,7 @@ class NeoPixelServer():
         current_perf_time = time.perf_counter()
 
         # only perform the check once in a minute to avoid all the pesky math
-        if current_perf_time - self.last_time_check > 3:
+        if current_perf_time - self.last_time_check > 60:
             self.last_time_check = current_perf_time
             current_time = datetime.utcnow()
             current_time = current_time + timedelta(minutes=self.minutes_jump) # speedup time for debugging
@@ -106,7 +107,7 @@ class NeoPixelServer():
                 self.current_effect = None
                 self.clear()
 
-            self.minutes_jump += 60  # speed up time for debugging
+            self.minutes_jump += self.minutes_jump_increment  # speed up time for debugging
 
 
     def run(self):
@@ -122,7 +123,7 @@ class NeoPixelServer():
 
                 if self.current_effect:
                     self.current_effect.next_frame()
-        #            pixels.show()
+                    self.pixels.show()
 
                 time.sleep(self.frame_delay)
             except KeyboardInterrupt:

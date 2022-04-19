@@ -1,5 +1,6 @@
 from math import pow
 from effects.common import create_gamma_table
+
 class Pixels:
     def __init__(self, count, gamma = 2.8) -> None:
         self.count = count
@@ -7,7 +8,16 @@ class Pixels:
         self.gamma_table = create_gamma_table(gamma)
 
     def show(self):
-        print(self.data)
+        print("".join(
+            [ str( 
+                round(
+                    10*
+                    (i["red"] + i["green"] + i["blue"] + i["white"])/4
+                    /255)
+                )
+                for i in self.data
+            ]
+        ))
 
     def setPixelColorRGB(self, n, red:int, green:int, blue:int, white:int = 0):
         if n < 0:
